@@ -1,0 +1,34 @@
+import { useState } from 'react'
+
+const useList = (initialValue = []) => {
+    const [value, setValue] = useState(initialValue)
+
+    // Push new value to list
+    const push = (element) => {
+        setValue((oldValue) => [...oldValue, element])
+    }
+
+    // Remove value from list
+    const remove = (index) => {
+        setValue((oldValue) => oldValue.filter((_, i) => i !== index))
+    }
+
+    const emptyList = () => {
+        setValue([])
+    }
+
+    const sortList = () => {
+        setValue((oldValue) => oldValue.sort())
+    }
+
+    const reverseList = () => {
+        setValue((oldValue) => oldValue.reverse())
+    }
+
+    // List is empty ? true / false
+    const isEmpty = () => value.length === 0
+
+    return { value, push, remove, isEmpty }
+}
+
+export default useList
